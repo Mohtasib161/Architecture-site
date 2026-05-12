@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaBehance, FaDribbble } from "react-icons/fa";

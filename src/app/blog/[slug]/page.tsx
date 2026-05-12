@@ -35,8 +35,8 @@ export default async function PublicationPage({ params }: Props) {
         subtitle={post.category}
         title={post.title}
         outlineText={post.date}
-        backgroundImage={post.image}
-        scrollTarget="#content"
+        bgImage={post.image}
+        scrollHref="#content"
       />
 
       <article id="content" className="py-24 bg-bg">
@@ -88,10 +88,10 @@ export default async function PublicationPage({ params }: Props) {
       </article>
 
       <Footer
-        variant="blog"
+        variant="subscribe"
         subtitle="Call to action"
-        title="Subscribe Our"
-        outlineTitle="Newsletter"
+        heading="Subscribe Our"
+        outlineText="Newsletter"
         body="Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 Asperiores, cupiditate?"
       />

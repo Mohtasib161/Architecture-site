@@ -16,17 +16,16 @@ export default function WorksPage() {
         subtitle="Portfolio"
         title="Explore Our Amazing"
         outlineText="Professional Cases"
-        body="Lorem ipsum dolor sit amet, consectetur adipisicing elit."
-        backgroundImage="/img/light/projects/prjct-6/1.jpg"
-        scrollTarget="#content"
+        bgImage="/img/light/projects/prjct-6/1.jpg"
+        scrollHref="#content"
       />
 
       <PortfolioGrid />
 
       <Footer
         subtitle="Call to action"
-        title="Do you have"
-        outlineTitle="a project?"
+        heading="Do you have"
+        outlineText="a project?"
         body="Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 Asperiores, cupiditate?"
         ctaLabel="Let's discuss"

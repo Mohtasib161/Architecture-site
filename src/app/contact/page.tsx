@@ -16,10 +16,8 @@ export default function ContactPage() {
         subtitle="Contact"
         title="Do you have any questions?"
         outlineText="Write us a message."
-        body="Lorem ipsum dolor sit amet, consectetur.
-Adipisicing elit suscipit, at."
-        backgroundImage="/img/light/projects/prjct-6/1.jpg"
-        scrollTarget="#content"
+        bgImage="/img/light/projects/prjct-6/1.jpg"
+        scrollHref="#content"
       />
 
       <div id="content">
@@ -28,8 +26,8 @@ Adipisicing elit suscipit, at."
 
       <Footer
         subtitle="Call to action"
-        title="We have an offer"
-        outlineTitle="for you"
+        heading="We have an offer"
+        outlineText="for you"
         body="Interesting? Enter your email address to find out"
         ctaLabel="Let's discuss"
         ctaHref="/contact"

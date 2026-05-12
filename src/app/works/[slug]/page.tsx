@@ -35,8 +35,8 @@ export default async function ProjectPage({ params }: Props) {
         subtitle={project.subtitle}
         title={project.title}
         outlineText="Case Study"
-        backgroundImage={project.fullImage}
-        scrollTarget="#content"
+        bgImage={project.fullImage}
+        scrollHref="#content"
       />
 
       {/* Project detail */}
@@ -101,8 +101,8 @@ export default async function ProjectPage({ params }: Props) {
 
       <Footer
         subtitle="Next project"
-        title="Do you have"
-        outlineTitle="a project?"
+        heading="Do you have"
+        outlineText="a project?"
         ctaLabel="Let's discuss"
         ctaHref="/contact"
         secondaryLabel="All Projects"

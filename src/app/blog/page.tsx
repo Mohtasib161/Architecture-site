@@ -16,9 +16,8 @@ export default function BlogPage() {
         subtitle="Blog"
         title="Explore Our Amazing"
         outlineText="Newsletter"
-        body="Lorem ipsum dolor sit amet, consectetur adipisicing elit."
-        backgroundImage="/img/light/projects/prjct-7/1.jpg"
-        scrollTarget="#content"
+        bgImage="/img/light/projects/prjct-7/1.jpg"
+        scrollHref="#content"
       />
 
       <div id="content">
@@ -26,10 +25,10 @@ export default function BlogPage() {
       </div>
 
       <Footer
-        variant="blog"
+        variant="subscribe"
         subtitle="Call to action"
-        title="Subscribe Our"
-        outlineTitle="Newsletter"
+        heading="Subscribe Our"
+        outlineText="Newsletter"
         body="Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 Asperiores, cupiditate?"
       />

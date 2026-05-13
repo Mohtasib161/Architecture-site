@@ -58,8 +58,7 @@ const Numbering = ({
       className="mry-subtitle"
       style={{ paddingLeft: 0, paddingTop: 40 }}
     >
-      <style>{`.num-sub-${num}::before{top:20px;left:50%;margin-left:-15px;}`}</style>
-      <span className={`num-sub-${num}`}>{label}</span>
+      <span>{label}</span>
     </div>
   </FO>
 );

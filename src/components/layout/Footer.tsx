@@ -55,7 +55,6 @@ export default function Footer({
             className="mry-subtitle mry-mb-20"
             style={{ paddingLeft: 0, paddingTop: 20, textAlign: "center" }}
           >
-            <style>{`.footer-sub::before{top:0;left:50%;margin-left:-15px;}`}</style>
             <span className="footer-sub">{subtitle}</span>
           </div>
 

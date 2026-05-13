@@ -63,22 +63,33 @@ export default function NavMenu() {
           onClick={() => setIsOpen(!isOpen)}
         >
           <span className="mry-label hidden sm:block">Menu</span>
-          <div className="relative w-8 h-6 flex flex-col justify-between cursor-pointer">
-            <span
-              className={`block h-[2px] bg-dark rounded transition-all duration-300 ${
-                isOpen ? "rotate-45 translate-y-[11px]" : ""
-              }`}
-            />
-            <span
-              className={`block h-[2px] bg-dark rounded transition-all duration-300 ${
-                isOpen ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`block h-[2px] bg-dark rounded transition-all duration-300 ${
-                isOpen ? "-rotate-45 -translate-y-[11px]" : ""
-              }`}
-            />
+          <div className="relative w-8 h-6 flex items-center justify-center cursor-pointer">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#010d0d"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="transition-transform duration-300"
+            >
+              {isOpen ? (
+                // Close (X) icon
+                <>
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </>
+              ) : (
+                // Hamburger icon
+                <>
+                  <line x1="3" y1="12" x2="21" y2="12" />
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <line x1="3" y1="18" x2="21" y2="18" />
+                </>
+              )}
+            </svg>
           </div>
         </div>
       </div>

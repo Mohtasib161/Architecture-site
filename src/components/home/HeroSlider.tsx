@@ -25,6 +25,7 @@ export default function HeroSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animate, setAnimate] = useState(false);
   const progressRef = useRef<HTMLDivElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
 
   // Trigger progress bar animation on slide change
   const resetProgress = () => {
@@ -43,32 +44,19 @@ export default function HeroSlider() {
   };
 
   useEffect(() => {
-    resetProgress();
+    setIsMounted(true);
   }, []);
+
+  // Prevent SSR hydration mismatch from Swiper's DOM manipulation
+  if (!isMounted) {
+    return <div className="relative w-screen h-screen overflow-hidden bg-[#f7f8fa]" />;
+  }
 
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-[#f7f8fa]">
-      {/* Minimal Swiper overrides for pagination/nav components */}
-      <style>{`
-        /* Swiper custom pagination bullets */
-        .mry-slider-pagination .swiper-pagination-bullet {
-          width: 10px !important;
-          margin-left: auto !important;
-          margin-bottom: 20px !important;
-          border-radius: 2px !important;
-          height: 3px !important;
-          opacity: 1 !important;
-          background-color: #0d0d0d !important;
-          transition: 0.3s ease-in-out !important;
-        }
-        .mry-slider-pagination .swiper-pagination-bullet:last-child {
-          margin-bottom: 0 !important;
-        }
-        .mry-slider-pagination .swiper-pagination-bullet-active {
-          width: 20px !important;
-          background-color: #ffb74d !important;
-        }
-      `}</style>
+      {/* Swiper custom pagination bullets moved to globals.css */}
+      {/* Dots Background (works if canvas.js script is loaded globally) */}
+      <canvas className="mry-dots absolute top-0 left-0 w-full h-screen opacity-60 pointer-events-none" />
 
       {/* Swiper main slider */}
       <Swiper
@@ -90,6 +78,7 @@ export default function HeroSlider() {
         }}
         onSwiper={(sw) => {
           swiperRef.current = sw;
+          resetProgress();
         }}
         onSlideChange={(sw) => {
           setActiveIndex(sw.realIndex);
@@ -111,7 +100,7 @@ export default function HeroSlider() {
                     data-swiper-parallax="500"
                     data-swiper-parallax-scale="1.4"
                   />
-                  <div className="absolute z-[2] inset-0 bg-transparent lg:bg-transparent transition-colors duration-400" />
+                  <div className="absolute z-[2] inset-0 bg-transparent transition-colors duration-400" />
                 </div>
 
                 {/* TEXT FRAME — absolute overlay, full height */}
@@ -120,35 +109,35 @@ export default function HeroSlider() {
                   <div className="container pointer-events-auto">
                     <div
                       className="w-full max-w-[430px] lg:max-w-none lg:w-full bg-[#f7f8fa] lg:bg-transparent p-[40px] lg:p-0 -ml-[15px] lg:ml-0"
-                      data-swiper-parallax-x="-30%"
+                      data-swiper-parallax-x="30%"
+                      data-swiper-parallax-scale=".7"
                       data-swiper-parallax-opacity="0"
                       data-swiper-parallax-duration="1000"
                     >
                       {/* Subtitle with amber line */}
-                      <p className="mry-subtitle mb-[10px] lg:mb-[20px] inline-block relative pl-[40px] text-[11px] uppercase font-semibold text-[#424242] tracking-[2px]">
-                        <span className="absolute left-0 top-[calc(50%-1.5px)] lg:top-[calc(50%-4px)] w-[30px] h-[3px] bg-[#ffb74d] rounded-[3px]" />
+                      <p className="mb-[10px] lg:mb-[20px] inline-block relative pl-[40px] text-[11px] uppercase font-semibold text-[#424242] tracking-[2px] before:content-[''] before:w-[30px] before:h-[3px] before:bg-[#ffb74d] before:rounded-[3px] before:absolute before:left-0 before:top-[calc(50%-1.5px)] lg:before:top-[calc(50%-4px)]">
                         {slide.subtitle}
                       </p>
 
                       {/* H1 with outline text */}
-                      <h1 className="mb-[15px] lg:mb-[30px] text-[32px] leading-[38px] lg:text-[72px] lg:leading-[84px] font-black tracking-[-1px] lg:tracking-normal text-[#010d0d] font-sans drop-shadow-[0_0_40px_rgba(247,248,250,0.5)]">
+                      <h1 className="mb-[15px] lg:mb-[30px] text-[32px] leading-[38px] tracking-[-1px] md:text-[54px] md:leading-[60px] md:tracking-normal lg:text-[72px] lg:leading-[84px] font-black text-[#010d0d] font-sans drop-shadow-[0_0_40px_rgba(247,248,250,0.5)] relative overflow-hidden lg:overflow-visible">
                         {slide.title}
                         <br />
-                        <span className="mry-border-text">{slide.outlineText}</span>
+                        <span className="md:[-webkit-text-stroke:2px_#010d0d] md:text-transparent max-md:[-webkit-text-stroke:0px] max-md:text-inherit">{slide.outlineText}</span>
                       </h1>
 
                       {/* Body text */}
                       <p
-                        className="mry-text mb-[15px] lg:mb-[30px] whitespace-pre-line text-[#424242] text-[14px] leading-[20px] lg:text-[16px] lg:leading-[22px]"
+                        className="mb-[15px] lg:mb-[30px] whitespace-pre-line text-[#424242] text-[14px] leading-[20px] md:text-[16px] md:leading-[22px]"
                         dangerouslySetInnerHTML={{ __html: slide.description }}
                       />
 
                       {/* Buttons */}
-                      <div className="flex flex-wrap items-center gap-1 mt-2">
-                        <Link href={slide.projectHref} className="mry-btn inline-flex items-center h-[55px] px-[40px] mr-[10px] text-[11px] uppercase font-semibold tracking-[2px] text-[#0d0d0d] border-2 border-[#0d0d0d] rounded-[3px] transition-colors duration-400 hover:text-[#ffb74d] hover:border-[#ffb74d]">
+                      <div className="flex flex-wrap items-center mt-2">
+                        <Link href={slide.projectHref} className="inline-flex items-center justify-center h-[55px] px-[40px] mr-[10px] text-[11px] uppercase font-semibold tracking-[2px] text-[#0d0d0d] border-2 border-[#0d0d0d] rounded-[3px] transition-colors duration-400 hover:text-[#ffb74d] hover:border-[#ffb74d]">
                           Open Case
                         </Link>
-                        <Link href={slide.allHref} className="mry-btn-text inline-flex items-center h-[55px] px-[20px] text-[11px] uppercase font-semibold tracking-[2px] text-[#0d0d0d] transition-colors duration-400 hover:text-[#ffb74d]">
+                        <Link href={slide.allHref} className="inline-flex items-center justify-center h-[55px] px-[20px] text-[11px] uppercase font-semibold tracking-[2px] text-[#0d0d0d] transition-colors duration-400 hover:text-[#ffb74d]">
                           All Projects
                         </Link>
                       </div>
@@ -176,18 +165,18 @@ export default function HeroSlider() {
         </div>
 
         {/* Arrows */}
-        <div className="absolute top-0 left-[20px] lg:left-auto lg:right-0 lg:px-[20px] lg:pl-[40px] bg-transparent lg:bg-[#f7f8fa] flex justify-start lg:justify-end items-center h-[80px] sm:h-[100px]">
+        <div className="absolute top-0 left-0 lg:left-auto lg:right-0 px-[10px] lg:px-[20px] lg:pr-[20px] lg:pl-[40px] bg-transparent lg:bg-[#f7f8fa] flex justify-start lg:justify-end items-center h-[80px] sm:h-[100px]">
           <span className="hidden lg:inline-block mr-[20px] text-[#0d0d0d] text-[11px] font-semibold tracking-[2px] uppercase">
             Slider Navigation
           </span>
           <button
-            className="w-[60px] h-[80px] lg:h-[100px] mry-button-prev flex justify-center items-center cursor-pointer text-[#0d0d0d] text-[20px] transition-colors hover:text-[#ffb74d] bg-transparent border-none p-0 outline-none"
+            className="w-[80px] h-[80px] lg:w-[100px] lg:h-[100px] mry-button-prev flex justify-center items-center cursor-pointer text-[#0d0d0d] text-[20px] transition-colors hover:text-[#ffb74d] bg-transparent border-none p-0 outline-none"
             aria-label="Previous slide"
           >
             <FaArrowLeft />
           </button>
           <button
-            className="w-[60px] h-[80px] lg:h-[100px] mry-button-next flex justify-center items-center cursor-pointer text-[#0d0d0d] text-[20px] transition-colors hover:text-[#ffb74d] bg-transparent border-none p-0 outline-none"
+            className="w-[80px] h-[80px] lg:w-[100px] lg:h-[100px] mry-button-next flex justify-center items-center cursor-pointer text-[#0d0d0d] text-[20px] transition-colors hover:text-[#ffb74d] bg-transparent border-none p-0 outline-none"
             aria-label="Next slide"
           >
             <FaArrowRight />

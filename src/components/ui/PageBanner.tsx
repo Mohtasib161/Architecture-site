@@ -75,14 +75,7 @@ export default function PageBanner({
                 textAlign: "center",
               }}
             >
-              <style>{`
-                .banner-subtitle::before {
-                  top: 0;
-                  left: 50%;
-                  margin-left: -15px;
-                }
-              `}</style>
-              <span className="banner-subtitle">{subtitle}</span>
+              {subtitle}
             </div>
 
             {/* H1 */}

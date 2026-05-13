@@ -1072,3 +1072,22 @@ h6 {
   color: #010d0d;
   opacity: 0.1;
 }
+
+/* ====== Swiper Custom Pagination ====== */
+.mry-slider-pagination .swiper-pagination-bullet {
+  width: 10px !important;
+  margin-left: auto !important;
+  margin-bottom: 20px !important;
+  border-radius: 2px !important;
+  height: 3px !important;
+  opacity: 1 !important;
+  background-color: #0d0d0d !important;
+  transition: 0.3s ease-in-out !important;
+}
+.mry-slider-pagination .swiper-pagination-bullet:last-child {
+  margin-bottom: 0 !important;
+}
+.mry-slider-pagination .swiper-pagination-bullet-active {
+  width: 20px !important;
+  background-color: #ffb74d !important;
+}

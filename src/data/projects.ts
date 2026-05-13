@@ -25,6 +25,12 @@ export const projects: Project[] = [
     year: "2021",
     location: "Toronto, Canada",
     client: "Private Client",
+    galleryImages: [
+      "/img/light/projects/prjct-1/1.jpg",
+      "/img/light/projects/prjct-1/4.jpg",
+      "/img/light/projects/prjct-1/3.jpg",
+      "/img/light/projects/prjct-1/2.jpg",
+    ],
   },
   {
     slug: "compact-house",
